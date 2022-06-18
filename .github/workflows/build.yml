@@ -47,7 +47,7 @@ jobs:
       run: make
 
     - name: Build release with Windows support
-      if: matrix.container == 'windows'
+      if: matrix.artifact == 'windows'
       run: |
         ./make-cmd-release.sh
 
@@ -104,7 +104,7 @@ jobs:
 
   test-nanoserver:
     needs: test
-    name: Test Makeself on Nanoserver
+    name: Test Makeself on Nanoserver with busybox
     runs-on: windows-2022
     env:
       IMAGE_NAME: mcr.microsoft.com/windows/nanoserver:ltsc2022-amd64
@@ -129,7 +129,7 @@ jobs:
 
   test-windows-with-cmd:
     needs: test
-    name: Test Makeself on Windows
+    name: Test Makeself on Windows with cmd
     runs-on: windows-2016
     steps:
       - uses: actions/checkout@v3
