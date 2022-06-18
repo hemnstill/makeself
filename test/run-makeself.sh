@@ -15,4 +15,5 @@ cd "$THISDIR"
 sh "../build-ubuntu/makeself-$VERSION.run" --target ./tmp/makeself-ubuntu
 sh "../build-alpine/makeself-$VERSION.run" --target ./tmp/makeself-alpine
 sh "../build-windows/makeself-$VERSION.run" --target ./tmp/makeself-windows
+sh "../build-windows/makeself-$VERSION.run.bat" --target ./tmp/makeself-windows-cmd
 sh "../build-macos/makeself-$VERSION.run" --target ./tmp/makeself-macos

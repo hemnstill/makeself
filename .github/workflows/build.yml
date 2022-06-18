@@ -132,11 +132,11 @@ jobs:
     name: Test Makeself on Windows
     runs-on: windows-2016
     steps:
-     - uses: actions/checkout@v3
-     - uses: actions/download-artifact@v3
-     - name: Test on Windows
-       shell: cmd
-       run: "./build-windows/makeself-$VERSION.run.bat" --target ./tmp/makeself-windows-cmd
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+      - name: Test on Windows
+        shell: cmd
+        run: ./test/run-makeself.bat
 
   lint:
     runs-on: ubuntu-latest
