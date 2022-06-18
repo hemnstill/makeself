@@ -2,3 +2,5 @@ _site
 *.run
 .*-cache/
 release/
+*.exe
+makeself-cmd-header.sh
