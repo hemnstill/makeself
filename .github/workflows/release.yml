@@ -17,8 +17,11 @@ jobs:
 
     - name: Build release
       run: |
-        git submodule update --init --recursive
         make
+
+    - name: Build release with Windows support
+      run: |
+        ./make-cmd-release.sh
 
     - name: Upload to release
       uses: ncipollo/release-action@v1
