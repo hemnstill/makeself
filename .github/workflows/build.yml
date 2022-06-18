@@ -46,6 +46,11 @@ jobs:
     - name: Build release
       run: make
 
+    - name: Build release with Windows support
+      if: matrix.container == 'windows'
+      run: |
+        ./make-cmd-release.sh
+
     - uses: actions/upload-artifact@v3
       with:
         name: build-${{ matrix.artifact }}
@@ -121,6 +126,17 @@ jobs:
       - name: Test on Nanoserver
         shell: cmd
         run: docker container run --rm --env CI=true -v ${{ github.workspace }}:C:\app -w C:\app ${{ env.IMAGE_NAME }} C:\app\busybox64.exe sh ./test/run-makeself.sh
+
+  test-windows-with-cmd:
+    needs: test
+    name: Test Makeself on Windows
+    runs-on: windows-2016
+    steps:
+     - uses: actions/checkout@v3
+     - uses: actions/download-artifact@v3
+     - name: Test on Windows
+       shell: cmd
+       run: "./build-windows/makeself-$VERSION.run.bat" --target ./tmp/makeself-windows-cmd
 
   lint:
     runs-on: ubuntu-latest
