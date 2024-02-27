@@ -1,6 +1,6 @@
 #!/bin/sh
 set -eu
-THIS="$(realpath "$0")"
+THIS="$(readlink -f "$0")"
 THISDIR="$(dirname "${THIS}")"
 SRCDIR="$(dirname "${THISDIR}")"
 VERSION="$(cat "${SRCDIR}/VERSION")"
@@ -12,6 +12,10 @@ uname -a
 
 cd "$THISDIR"
 
+# Try a quiet run
+sh "../build-ubuntu/makeself-$VERSION.run" --quiet --target ./tmp/makeself-ubuntu
+
+# Regular runs
 sh "../build-ubuntu/makeself-$VERSION.run" --target ./tmp/makeself-ubuntu
 sh "../build-alpine/makeself-$VERSION.run" --target ./tmp/makeself-alpine
 sh "../build-windows/makeself-$VERSION.run" --target ./tmp/makeself-windows
