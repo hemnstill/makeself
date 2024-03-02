@@ -18,9 +18,17 @@ cat "$THISDIR/makeself-header.sh" | tail -n +2 > "$content_makeself_header"
 
 win_header_path="$THISDIR/makeself-cmd-header.sh"
 
-busybox_exename="busybox-w64-FRP-4716-g31467ddfc.exe"
+busybox_exename="busybox-w64-FRP-5301-gda71f7c57.exe"
+if [[ ! -z ${MOCK_BUSYBOX_EXENAME+x} ]]; then
+  busybox_exename="$MOCK_BUSYBOX_EXENAME"
+fi
+
+download_url="https://frippery.org/files/busybox/$busybox_exename"
 busybox_exepath="$THISDIR/$busybox_exename"
-[[ ! -f "$busybox_exepath" ]] && curl --fail --location "https://frippery.org/files/busybox/busybox-w64-FRP-4716-g31467ddfc.exe" --output "$busybox_exepath"
+if [[ ! -f "$busybox_exepath" ]]; then
+  echo "Downloading: $download_url ..."
+  curl --fail --location "$download_url" --output "$busybox_exepath"
+fi
 
 {
   echo -----BEGIN CERTIFICATE-----
